@@ -33,8 +33,10 @@ class Solution(object):
             if nums2[i] in map:
                 res.append(nums2[i])
                 map[nums2[i]] -= 1
+                if map[nums2[i]] == 0:
+                    map.pop(nums2[i])
         return res
 
 s = Solution()
-res = s.intersect([1, 2, 2, 1], [2, 2])
+res = s.intersect([4, 9, 5], [9, 4, 9, 8, 4])
 print(res)
