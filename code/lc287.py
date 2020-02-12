@@ -19,16 +19,32 @@
 
 class Solution(object):
     def findDuplicate(self, nums):
-        index = 0
-        while index < len(nums):
-            while nums[index] - 1 != index:
-                if nums[index] == nums[nums[index] - 1]:
-                    return nums[index]
-                tmp = nums[nums[index] - 1]
-                nums[nums[index] - 1] = nums[index]
-                nums[index] = tmp
-            index+= 1
-        return 0
+        # 此方法改变了原数组
+        # index = 0
+        # while index < len(nums):
+        #     while nums[index] - 1 != index:
+        #         if nums[index] == nums[nums[index] - 1]:
+        #             return nums[index]
+        #         tmp = nums[nums[index] - 1]
+        #         nums[nums[index] - 1] = nums[index]
+        #         nums[index] = tmp
+        #     index+= 1
+        # return 0
+
+        # 快慢指针
+        fastIndex = nums[nums[0]]
+        slowIndex = nums[0]
+        while fastIndex != slowIndex:
+            fastIndex = nums[nums[fastIndex]]
+            slowIndex = nums[slowIndex]
+
+        index1 = 0
+        index2 = fastIndex
+        while index1 != index2:
+            index1 = nums[index1]
+            index2 = nums[index2]
+
+        return index1
 
 s = Solution()
 res = s.findDuplicate([1, 2, 4, 2, 2])
