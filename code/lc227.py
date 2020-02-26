@@ -67,5 +67,5 @@ class Solution(object):
         return res
 
 s = Solution()
-res = s.calculate("2*3+2")
+res = s.calculate("2 * 3 + 2")
 print(res)
