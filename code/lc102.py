@@ -35,17 +35,17 @@ class Solution(object):
         res.append([root.val])
         while len(queue) > 0:
             tmpQueue = []
+            tmpRes = []
             while len(queue) > 0:
                 node = queue[0]
                 del queue[0]
                 if node.left is not None:
                     tmpQueue.append(node.left)
+                    tmpRes.append(node.left.val)
                 if node.right is not None:
                     tmpQueue.append(node.right)
-            if len(tmpQueue) > 0:
-                tmpRes = []
-                for i in range(len(tmpQueue)):
-                    tmpRes.append(tmpQueue[i].val)
+                    tmpRes.append(node.right.val)
+            if len(tmpRes) > 0:
                 res.append(tmpRes)
             queue = tmpQueue
         return res
