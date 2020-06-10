@@ -24,11 +24,9 @@ class Solution(object):
                     digits[i] = 0
                 else:
                     digits[i] += 1
-                    b = False
-        if b:
-            return [1] + digits
-        else:
-            return digits
+                    return digits
+        return [1] + digits
+
 
 s = Solution()
 res = s.plusOne([9, 9, 9, 9])
