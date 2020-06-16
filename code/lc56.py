@@ -18,12 +18,13 @@ class Solution(object):
         if len(intervals) < 2:
             return intervals
         # sort
-        for i in range(len(intervals)):
-            for x in range(i, len(intervals)):
-                if intervals[i][0] > intervals[x][0]:
-                    tmp = intervals[i]
-                    intervals[i] = intervals[x]
-                    intervals[x] = tmp
+        # for i in range(len(intervals)):
+        #     for x in range(i, len(intervals)):
+        #         if intervals[i][0] > intervals[x][0]:
+        #             tmp = intervals[i]
+        #             intervals[i] = intervals[x]
+        #             intervals[x] = tmp
+        intervals.sort(key=lambda x: x[0])
         index = 0
         while index < len(intervals) - 1:
             if intervals[index][1] >= intervals[index + 1][0]:
