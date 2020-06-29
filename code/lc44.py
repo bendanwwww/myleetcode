@@ -45,7 +45,32 @@ p = "a*c?b"
 """
 
 class Solution(object):
-    dp = {}
+    # dp = {}
+
+    # def isMatch(self, s, p):
+    #     if len(s) == 0 and len(p) == 0:
+    #         return True
+    #     p2 = ''
+    #     for i in p:
+    #         if i != '*' or len(p2) == 0 or p2[len(p2) - 1] != '*':
+    #             p2+= i
+    #     return self.find(s, p2)
+    #
+    # def find(self, s, p):
+    #     if (s, p) in self.dp:
+    #         return self.dp[(s, p)]
+    #     elif s == p or p == '*':
+    #         self.dp[(s, p)] = True
+    #     elif s == '' or p == '':
+    #         self.dp[(s, p)] = False
+    #     elif s[0] == p[0] or p[0] == '?':
+    #         self.dp[(s, p)] = self.find(s[1:], p[1:])
+    #     elif p[0] == '*':
+    #         self.dp[(s, p)] = self.find(s, p[1:]) or self.find(s[1:], p)
+    #     else:
+    #         self.dp[(s, p)] = False
+    #     return self.dp[(s, p)]
+
 
     def isMatch(self, s, p):
         if len(s) == 0 and len(p) == 0:
@@ -54,23 +79,20 @@ class Solution(object):
         for i in p:
             if i != '*' or len(p2) == 0 or p2[len(p2) - 1] != '*':
                 p2+= i
-        return self.find(s, p2)
+        dp = [[False] * (len(s) + 1) for _ in range(len(p2) + 1)]
+        dp[0][0] = True
+        for i in range(1, len(p2) + 1):
+            if p2[i - 1] == '*':
+                dp[i][0] = dp[i - 1][0]
+        for i in range(1, len(p2) + 1):
+            for x in range(1, len(s) + 1):
+                if p2[i - 1] == '*':
+                    dp[i][x] = dp[i - 1][x] or dp[i][x - 1]
+                else:
+                    dp[i][x] = dp[i - 1][x - 1] and (p2[i - 1] == '?' or p2[i - 1] == s[x - 1])
 
-    def find(self, s, p):
-        if (s, p) in self.dp:
-            return self.dp[(s, p)]
-        elif s == p or p == '*':
-            self.dp[(s, p)] = True
-        elif s == '' or p == '':
-            self.dp[(s, p)] = False
-        elif s[0] == p[0] or p[0] == '?':
-            self.dp[(s, p)] = self.find(s[1:], p[1:])
-        elif p[0] == '*':
-            self.dp[(s, p)] = self.find(s, p[1:]) or self.find(s[1:], p)
-        else:
-            self.dp[(s, p)] = False
-        return self.dp[(s, p)]
+        return dp[len(p2)][len(s)]
 
 s = Solution()
-res = s.isMatch("babbbbaabababaabbababaababaabbaabababbaaababbababaaaaaabbabaaaabababbabbababbbaaaababbbabbbbbbbbbbaabbb", "b**bb**a**bba*b**a*bbb**aba***babbb*aa****aabb*bbb***a")
+res = s.isMatch("acdcb", "a*c?b")
 print(res)
