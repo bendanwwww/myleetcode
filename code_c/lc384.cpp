@@ -28,11 +28,7 @@ nums 中的所有元素都是 唯一的
 #include <vector>
 #include <map>
 #include <cstdlib>
-<<<<<<< HEAD
 #include <ctime>
-=======
-#include<ctime>
->>>>>>> 5a2250c26dc5541f57f51aa6c013ae42710fb2af
 using namespace std;
 
 class Solution {
