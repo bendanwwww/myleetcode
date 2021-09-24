@@ -27,11 +27,8 @@ randomSet.getRandom();
 #include <list>
 #include <map>
 #include <cstdlib>
-<<<<<<< HEAD
-#include <ctime>
-=======
 #include<ctime>
->>>>>>> 5a2250c26dc5541f57f51aa6c013ae42710fb2af
+
 using namespace std;
 
 class MyListNode {
